@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 export default class JobsList extends Component {
 
 constructor(props) {
@@ -31,6 +31,7 @@ constructor(props) {
             job_club: e.target.value
         });
     }
+    // Do we really need Priority??
     onChangeJobPriority(e) {
         this.setState({
             job_priority: e.target.value
@@ -48,6 +49,16 @@ constructor(props) {
         console.log(`Job Completed: ${this.state.job_completed}`)
 
 
+        const newTodo = {
+            job_description: this.state.job_description,
+            job_club: this.state.job_club,
+            job_priority:this.state.job_club,
+            job_completed: this.state.job_completed  
+        }
+
+        axios.post('http://localhost:4000/todos/add', newTodo)
+            .then(res => console.log(res.data));
+
 
         this.setState({
             job_description: '',
@@ -59,7 +70,7 @@ constructor(props) {
 
     render() {
         return (
-            <div style={{marginTop: 20}}>
+            <div style={{marginTop: 10}}>
                 <h3>Create New Job</h3>
                 <form onSubmit={this.onSubmit}>
                 <div className = "form-group">
