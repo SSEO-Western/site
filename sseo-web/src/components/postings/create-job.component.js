@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Navbar from "../navigation/Navbar.js";
 export default class JobsList extends Component {
 
 constructor(props) {
@@ -70,6 +71,9 @@ constructor(props) {
 
     render() {
         return (
+            <div>
+            <Navbar></Navbar>
+
             <div style={{marginTop: 10}}>
                 <h3>Create New Job</h3>
                 <form onSubmit={this.onSubmit}>
@@ -133,6 +137,7 @@ constructor(props) {
                 </form>
                 
               
+            </div>
             </div>
         )
     }
