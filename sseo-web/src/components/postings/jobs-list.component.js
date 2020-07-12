@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios'
+import Navbar from "../navigation/Navbar.js";
 
 const Job = props => (
     <tr>
@@ -36,6 +37,7 @@ export default class JobsList extends Component {
     render() {
         return (
             <div>
+                <Navbar></Navbar>
                 <h3> Jobs List</h3>
                 <table className="table table-striped" style = {{marginTop:20}}>
                     <thead>
