@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-mongoose.connect('mongodb+srv://dbEricKogut:Up9I3Xji05oAc9KH@sseocluster.k4wfx.mongodb.net/test?authSource=admin&replicaSet=atlas-pcpsp7-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true',
+mongoose.connect('hehe URI here',
  {
      useNewUrlParser: true
 });
