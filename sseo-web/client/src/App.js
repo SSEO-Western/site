@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom"
-import "bootstrap/dist/css/bootstrap.min.css";
+
 
 //Postings
 import CreateTodo from "./components/postings/create-job.component";
@@ -13,8 +13,6 @@ class App extends Component {
     return (
       <Router>
       <div className="container">
-        
-     
           <Route path="/" exact component={TodosList} />
           <Route path="/edit/:id" component={EditTodo} />
           <Route path="/create" component={CreateTodo} />

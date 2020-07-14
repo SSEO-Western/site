@@ -6,16 +6,21 @@ const mongoose = require('mongoose');
 const jobRoutes = express.Router();
 const PORT = 4000
 
-let Job = require('./job.model');
+//let Job = require('./sseo-web/models/JobModel');
 
 
 app.use(cors());
 app.use(bodyParser.json());
-mongoose.connect('mongodb://127.0.0.1:27017/jobs', {useNewUrlParser: true});
+
+
+mongoose.connect('mongodb+srv://dbEricKogut:Up9I3Xji05oAc9KH@sseocluster.k4wfx.mongodb.net/test?authSource=admin&replicaSet=atlas-pcpsp7-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true',
+ {
+     useNewUrlParser: true
+});
+
 const connection = mongoose.connection;
 
-
-connection.once('open', function(){
+connection.on('connected', function(){
     console.log("MongoDB database connection established successfully");
 });
 

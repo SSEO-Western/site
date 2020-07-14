@@ -1,1 +1,0 @@
-Hello, this will serve as the website for the SSEO! Created by and for its members :)
