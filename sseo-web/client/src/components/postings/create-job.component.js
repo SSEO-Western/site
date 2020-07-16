@@ -57,7 +57,7 @@ constructor(props) {
             job_completed: this.state.job_completed  
         }
 
-        axios.post('http://localhost:4000/todos/add', newTodo)
+        axios.post('http://localhost:4000/routes/postings/add', newTodo)
             .then(res => console.log(res.data));
 
 
