@@ -1,13 +1,16 @@
-const mongoose = require ('mongoose');
-const Schema = mongoose.Schema;
+module.exports = mongoose => {
+  const Posting = mongoose.model(
+    "posting",
+    mongoose.Schema(
+      {
+        postingDescription: String,
+        postingType: String,
+        postingPriority: String,
+        postingCompleted: Boolean
+      },
+      { timestamps: true }
+    )
+  );
 
-const PostingSchema = new Schema(
-    {
-      postingDescription: String,
-      postingType: String,
-      postingPriority: String,
-      postingCompleted:  Boolean,
-    }
-);
-
-module.exports = mongoose.model('postings',PostingSchema);
+  return Posting;
+};

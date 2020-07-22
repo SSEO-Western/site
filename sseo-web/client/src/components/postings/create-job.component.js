@@ -59,7 +59,7 @@ constructor(props) {
 
         axios.post('http://localhost:4000/routes/postings/add', newTodo)
             .then(res => console.log(res.data));
-
+       
 
         this.setState({
             job_description: '',
