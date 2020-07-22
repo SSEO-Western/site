@@ -3,54 +3,47 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require("mongoose");
-require('dotenv').config();
+const PORT = 4000;
+const router = express.Router();
 
-require("./routes/postings")(app);
-
-
-var corsOptions = {
-  origin: "http://localhost:4000"
-};
-
-app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
+//
+app.use(cors());
 app.use(bodyParser.json());
 
 
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "What is oatmeal?" });
+
+// routes
+const postings = require('./routes/postings');
+app.use('/models/postings', postings)
+
+
+//let Job = require('./sseo-web/models/JobModel');
+app.get('/', (req, res) => res.send('Server is up and running'));
+mongoose.connect('uri here',
+ {
+     useNewUrlParser: true
 });
 
-// set port, listen for requests
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+
+const connection = mongoose.connection;
+connection.once('open', function() {
+    console.log("MongoDB database connection established successfully");
+})
+
+
+
+app.listen(PORT, function() {
+    console.log("Server is running on Port: " + PORT);
 });
 
-
-
-const db = require("./models");
-db.mongoose
-  .connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Connected to the database!");
-  })
-  .catch(err => {
-    console.log("Cannot connect to the database!", err);
-    process.exit();
-  });
-
-
-
-
-
-
-
-
- 
+router.route('/add').post(function(req,res){
+    let job = new Job(req.body);
+    job.save()
+        .then(todo => {
+            res.status(200).json({'job': 'job added successfully'})
+        })
+        .catch(err=>{
+            res.status(400).send('adding new job failed');
+        });
+});
