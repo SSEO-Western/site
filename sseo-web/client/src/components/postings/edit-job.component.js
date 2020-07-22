@@ -2,72 +2,73 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 
-export default class JobsList extends Component {
+export default class PostingsList extends Component {
 
     constructor(props){
         super(props);
-
-        this.onChangeJobDescription = this.onChangeJobDescription.bind(this);
-        this.onChangeJobPriority = this.onChangeJobPriority.bind(this);
-        this.onChangeJobclub = this.onChangeJobclub.bind(this);
-        this.onChangeJobCompleted = this.onChangeJobCompleted.bind(this);
+        console.log("This is the id", this.props.match.params._id);
+        this.onChangePostingDescription = this.onChangePostingDescription.bind(this);
+        this.onChangePostingPriority = this.onChangePostingPriority.bind(this);
+        this.onChangePostingType = this.onChangePostingType.bind(this);
+        this.onChangePostingCompleted = this.onChangePostingCompleted.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state= {
-            job_description: '',
-            job_club: '',
-            job_priority: '',
-            job_completed: false
+            postingDescription: '',
+            postingType: '',
+            postingPriority: '',
+            postingCompleted: false
         }
     }
 
     componentDidMount(){
-        axios.get('http://localhost:4000/todos/' + this.props.match.params.id)
+        axios.get('http://localhost:4000/postings/' + this.props.match.params._id)
          .then(response => {
             this.setState({
-                job_description: response.data.job_description,
-                job_club: response.data.job_club,
-                job_priority: response.data.job_priority,
-                job_completed: response.data.job_completed
+                
+                postingDescription: response.data.postingDescription,
+                postingType: response.data.postingType,
+                postingPriority: response.data.postingPriority,
+                postingCompleted: response.data.postingCompleted
             })
         })
         .catch(function(error) {
             console.log(error)
         })
     }
-    onChangeJobDescription(e){
+    onChangePostingDescription(e){
         this.setState({
-            job_description: e.target.value
+            postingDescription: e.target.value
         });
     }
 
-    onChangeJobclub(e){
+    onChangePostingType(e){
         this.setState({
-            job_club: e.target.value
+            postingType: e.target.value
         });
     }
 
-    onChangeJobPriority(e){
+    onChangePostingPriority(e){
         this.setState({
-            job_priority: e.target.value
+            postingPriority: e.target.value
         });
     }
 
-    onChangeJobCompleted(e){
+    onChangePostingCompleted(e){
         this.setState({
-            job_completed: !this.state.job_completed
+            postingCompleted: !this.state.postingCompleted
         });
     }
 
     onSubmit(e){
         e.preventDefault();
         const obj = {
-            job_description: this.state.job_description,
-            job_club: this.state.job_club,
-            job_priority: this.state.job_priority,
-            job_completed: this.state.job_completed
+            postingDescription: this.state.postingDescription,
+            postingClub: this.state.postingClub,
+            postingPriority: this.state.postingPriority,
+            postingCompleted: this.state.postingCompleted
         };
-        axios.post('http://localhost:4000/todos/update/' + this.props.match.params.id, obj)
+        axios.put('http://localhost:4000/postings/' + this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
         this.props.history.push('/');
@@ -81,8 +82,8 @@ export default class JobsList extends Component {
                         <label>Description: </label>
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.job_description}
-                                onChange={this.onChangeJobDescription}
+                                value={this.state.postingDescription}
+                                onChange={this.onChangePostingDescription}
                                 />
                     </div>
                     <div className="form-group">
@@ -90,8 +91,8 @@ export default class JobsList extends Component {
                         <input 
                                 type="text" 
                                 className="form-control"
-                                value={this.state.job_club}
-                                onChange={this.onChangeJobclub}
+                                value={this.state.postingType}
+                                onChange={this.onChangePostingType}
                                 />
                     </div>
                     <div className="form-group">
@@ -101,8 +102,8 @@ export default class JobsList extends Component {
                                     name="priorityOptions" 
                                     id="priorityLow" 
                                     value="Low"
-                                    checked = {this.state.job_priority === 'Low'}
-                                    onChange = {this.onChangeJobPriority}
+                                    checked = {this.state.postingPriority === 'Low'}
+                                    onChange = {this.onChangePostingPriority}
                                     />
                             <label className="form-check-label">Low</label>
                         </div>
@@ -112,8 +113,8 @@ export default class JobsList extends Component {
                                     name="priorityOptions" 
                                     id="priorityMedium" 
                                     value="Medium" 
-                                    checked = {this.state.job_priority === 'Medium'}
-                                    onChange = {this.onChangeJobPriority}
+                                    checked = {this.state.postingPriority === 'Medium'}
+                                    onChange = {this.onChangePostingPriority}
                                     />
                             <label className="form-check-label">Medium</label>
                         </div>
@@ -123,8 +124,8 @@ export default class JobsList extends Component {
                                     name="priorityOptions" 
                                     id="priorityHigh" 
                                     value="High" 
-                                    checked = {this.state.job_priority === 'High'}
-                                    onChange = {this.onChangeJobPriority}
+                                    checked = {this.state.postingPriority === 'High'}
+                                    onChange = {this.onChangePostingPriority}
                                     />
                             <label className="form-check-label">High</label>
                         </div>
@@ -135,8 +136,8 @@ export default class JobsList extends Component {
                                 type="checkbox"
                                 name="completedCheckbox"
                                 onChange={this.onChangeJobCompleted}
-                                checked={this.state.job_completed}
-                                value={this.state.job_completed}
+                                checked={this.state.postingCompleted}
+                                value={this.state.postingCompleted}
                                 />
                         <label className="form-check-label" htmlFor="completedCheckbox">
                             Completed

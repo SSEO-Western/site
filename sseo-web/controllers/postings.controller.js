@@ -9,7 +9,7 @@ exports.create = (req, res) => {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
-
+  console.log("trigard")
   // Create a Posting
   const posting = new Posting({
     postingDescription: req.body.postingDescription,

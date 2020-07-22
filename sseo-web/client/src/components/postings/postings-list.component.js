@@ -3,36 +3,41 @@ import {Link} from 'react-router-dom';
 import axios from 'axios'
 import Navbar from "../navigation/Navbar.js";
 
-const Job = props => (
+const Posting = props => (
     <tr>
-        <td>{props.job.job_description}</td>
-        <td>{props.job.job_club}</td>
-        <td>{props.job.job_priority}</td>
+        <td>{props.posting.postingDescription}</td>
+        <td>{props.posting.postingType}</td>
+        <td>{props.posting.postingPriority}</td>
         <td>
-            <Link to={"/edit/"+props.job._id}> Edit</Link>
+            
+            <Link to={"/edit/"+props.posting._id}> Edit</Link>
         </td>
     </tr>
 )
-export default class JobsList extends Component {
+export default class PostingsList extends Component {
 
     constructor(props){
         super(props);
-        this.state = {jobs: []};
+        this.state = {postings: []};
     }
 
     componentDidMount(){
-        axios.get('http://localhost:4000/todos/')
+        console.log("Mounted")
+        axios.get('http://localhost:4000/api/postings/')
         .then(response => {
-            this.setState({jobs: response.data});
+            this.setState({postings: response.data});
         })
         .catch(function(error){
             console.log(error);
         })
     }
-    JobList() {
-        return this.state.jobs.map(function(currentTodo, i){
-            return <Job job={currentTodo} key={i} />;
+
+    PostingList() {
+        return this.state.postings.map(function(currentPosting, i){
+            return <Posting posting={currentPosting} key={i} />;
         })
+
+
     }
     render() {
         return (
@@ -42,14 +47,14 @@ export default class JobsList extends Component {
                 <table className="table table-striped" style = {{marginTop:20}}>
                     <thead>
                         <tr>
-                            <th>Job Description</th>
-                            <th>Club</th>
+                            <th>Posting Description</th>
+                            <th>Type</th>
                             <th>Priority</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        { this.JobList()}
+                        { this.PostingList()}
                     </tbody>
                 </table>
                 

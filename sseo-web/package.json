@@ -15,6 +15,7 @@
     "proxy": "http://localhost:5000",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
+  "proxy": "http://localhost:3000",
   "keywords": [],
   "author": "",
   "license": "ISC",

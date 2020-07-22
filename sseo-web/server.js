@@ -4,18 +4,22 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require("mongoose");
 require('dotenv').config();
+app.use(cors(corsOptions));
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
 
 require("./routes/postings")(app);
 
 
 var corsOptions = {
-  origin: "http://localhost:4000"
+  origin: "*",
+ methods: "GET,PUT,POST,DELETE"
 };
 
-app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
+
+
+
 
 
 

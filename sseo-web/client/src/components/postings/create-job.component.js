@@ -6,36 +6,37 @@ export default class JobsList extends Component {
 constructor(props) {
     super(props);
 
-    this.onChangeJobDescription = this.onChangeJobDescription.bind(this);
-    this.onChangeJobClub = this.onChangeJobClub.bind(this);
-    this.onChangeJobPriority = this.onChangeJobPriority.bind(this);
+    this.onChangePostingDescription = this.onChangePostingDescription.bind(this);
+    this.onChangePostingType = this.onChangePostingType.bind(this);
+    this.onChangePostingPriority = this.onChangePostingPriority.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
 
 
     this.state = {
-        job_description: '',
-        job_club: '',
-        job_priority: '',
-        job_completed: false
+        postingDescription: '',
+        postingType : '',
+        postingPriority: '',
+        postingCompleted: false
     }
 
 }
-    onChangeJobDescription(e) {
+    onChangePostingDescription(e) {
         this.setState({
-            job_description: e.target.value
+            postingDescription: e.target.value
         });
     }
 
-    onChangeJobClub(e) {
+    onChangePostingType(e) {
         this.setState({
-            job_club: e.target.value
+            postingType: e.target.value
         });
     }
     // Do we really need Priority??
-    onChangeJobPriority(e) {
+    //DOnt think so tbh
+    onChangePostingPriority(e) {
         this.setState({
-            job_priority: e.target.value
+            postingPriority: e.target.value
         });
     }
 
@@ -44,28 +45,29 @@ constructor(props) {
         
         //put the onsumbit logic here instead of the console
         console.log('Form Submitted');
-        console.log(`Job Description: ${this.state.job_description}`)
-        console.log(`Job Club: ${this.state.job_club}`)
-        console.log(`Job Priority: ${this.state.job_priority}`)
-        console.log(`Job Completed: ${this.state.job_completed}`)
+        console.log(`Posting Description: ${this.state.postingDescription}`)
+        console.log(`Posting Type: ${this.state.postingClub}`)
+        console.log(`Posting Priority: ${this.state.postingPriority}`)
+        console.log(`Posting Completed: ${this.state.postingCompleted}`)
 
 
-        const newTodo = {
-            job_description: this.state.job_description,
-            job_club: this.state.job_club,
-            job_priority:this.state.job_club,
-            job_completed: this.state.job_completed  
+        const posting = {
+            postingDescription: this.state.postingDescription,
+            postingType : this.state.postingType,
+            postingPriority: this.state.postingPriority,
+            postingCompleted: this.state.postingCompleted
         }
-
-        axios.post('http://localhost:4000/routes/postings/add', newTodo)
+        console.log(posting)
+        axios.post('http://localhost:4000/api/postings/', posting)
             .then(res => console.log(res.data));
        
 
+    
         this.setState({
-            job_description: '',
-            job_club: '',
-            job_priority: '',
-            job_completed: false
+            postingDescription: '',
+            postingType : '',
+            postingPriority: '',
+            postingCompleted: false
         })
     }
 
@@ -81,16 +83,16 @@ constructor(props) {
                     <label>Description: </label>
                     <input type = "text"
                         className = "form-control"
-                        value = {this.state.job_description}
-                        onChange={this.onChangeJobDescription}/>
+                        value = {this.state.postingDescription}
+                        onChange={this.onChangePostingDescription}/>
 
                 </div>
                 <div className = "form-group">
                     <label>Club: </label>
                     <input type = "text"
                         className = "form-control"
-                        value = {this.state.job_club}
-                        onChange={this.onChangeJobClub}/>
+                        value = {this.state.postingType}
+                        onChange={this.onChangePostingType}/>
 
                 </div>
                 <div className = "form-group">
@@ -100,8 +102,8 @@ constructor(props) {
                                 name = "priorityOptions"
                                 id = "priorityLow"
                                 value = "Low"
-                                checked = {this.state.job_priority === 'Low'}
-                                onChange = {this.onChangeJobPriority}
+                                checked = {this.state.postingPriority === 'Low'}
+                                onChange = {this.onChangePostingPriority}
                         />
                         <label className = "form-check-label">Low</label>
                     </div>
@@ -112,8 +114,8 @@ constructor(props) {
                                 name = "priorityOptions"
                                 id = "priorityMedium"
                                 value = "Medium"
-                                checked = {this.state.job_priority === 'Medium'}
-                                onChange = {this.onChangeJobPriority}
+                                checked = {this.state.postingPriority === 'Medium'}
+                                onChange = {this.onChangePostingPriority}
                         />
                         <label className = "form-check-label">Medium</label>
                     </div>
@@ -123,8 +125,8 @@ constructor(props) {
                                 name = "priorityOptions"
                                 id = "priorityHigh"
                                 value = "High"
-                                checked = {this.state.job_priority === 'High'}
-                                onChange = {this.onChangeJobPriority}
+                                checked = {this.state.postingPriority === 'High'}
+                                onChange = {this.onChangePostingPriority}
                         />
                         <label className = "form-check-label">High</label>
                     </div>

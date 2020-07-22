@@ -18,10 +18,10 @@ const Navbar = () => {
 <div className="collpase navbar-collapse">
   <ul className="navbar-nav mr-auto">
     <li className="navbar-item">
-      <Link to="/" className="nav-link">Job List</Link>
+      <Link to="/" className="nav-link">Postings</Link>
     </li>
     <li className="navbar-item">
-      <Link to="/create" className="nav-link">Create Job</Link>
+      <Link to="/create" className="nav-link">Add a Posting</Link>
     </li>
   </ul>
 </div>
